@@ -6,7 +6,8 @@ import Particles from "@/components/particles";
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
-  const [selectedDocument, setSelectedDocument] = useState(null); // State to track the selected document
+  const [selectedDocument, setSelectedDocument] = useState(null);
+  const [loading, setLoading] = useState(true); // Added loading state
   const thumbnailPlaceholder = "https://placehold.co/240x340";
 
   useEffect(() => {
@@ -18,7 +19,6 @@ export default function Page() {
         }
         const data = await res.json();
 
-        // Separate documents into semester 1 and semester 2 arrays
         const semester1 = data.filter(
           (doc) => doc.year === 1 && doc.semester === 1
         );
@@ -28,10 +28,14 @@ export default function Page() {
 
         setSemester1Documents(semester1);
         setSemester2Documents(semester2);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1250);
       } catch (error) {
         console.error("Error fetching documents:", error);
         setSemester1Documents([]);
         setSemester2Documents([]);
+        setLoading(false); // Set loading to false in case of error
       }
     };
 
@@ -48,81 +52,105 @@ export default function Page() {
 
   return (
     <main>
-      <div className="bg-gradient-to-tl from-black/20 via-zinc-600/20 to-black/20 antialiased">
-        <Particles className="absolute inset-0 -z-10" quantity={100} />
-        <div className="flex flex-col justify-center items-center pt-12">
-          <h1 className="text-4xl font-bold">Semester 1</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 max-w-7xl mt-5">
-            {semester1Documents.map((document, index) => (
-              <div
-                key={index}
-                className="flex flex-col justify-center hover:scale-105 duration-200 items-center"
-              >
-                <button onClick={() => openModal(document)}>
-                  <Image
-                    src={document.thumbnail || thumbnailPlaceholder}
-                    alt={document.documentName}
-                    width={400}
-                    height={500}
-                    quality={100}
-                    className="border h-[340px] w-[240px] object-cover cursor-pointer"
-                  />
-                </button>
-                <a
-                  className="text-lg text-center font-bold truncate w-[240px]"
-                  href={document.pdfLink}
-                >
-                  {document.documentName}
-                </a>
-              </div>
-            ))}
-          </div>
-          <h1 className="text-4xl font-bold mt-10">Semester 2</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 max-w-7xl mt-5">
-            {semester2Documents.map((document, index) => (
-              <div
-                key={index}
-                className="flex flex-col justify-center hover:scale-105 duration-200 items-center"
-              >
-                <button onClick={() => openModal(document)}>
-                  <Image
-                    src={document.thumbnail || thumbnailPlaceholder}
-                    alt={document.documentName}
-                    width={400}
-                    height={500}
-                    quality={100}
-                    className="rounded-md h-[340px] w-[240px] object-cover cursor-pointer"
-                  />
-                </button>
-                <a
-                  className="text-lg text-center font-bold truncate w-[240px]"
-                  href={document.pdfLink}
-                >
-                  {document.documentName}
-                </a>
-              </div>
-            ))}
+      {loading ? ( // Loading screen condition
+        <div
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div class="banter-loader">
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
+            <div class="banter-loader__box"></div>
           </div>
         </div>
-        {selectedDocument && (
-          <div
-            className="fixed top-0 left-0 w-full h-screen bg-black/50 flex justify-center items-center z-50"
-            onClick={closeModal}
-          >
-            <button
-              className="absolute top-2 right-2 text-lg font-bold text-white"
+      ) : (
+        <div className="bg-gradient-to-tl from-black/20 via-zinc-600/20 to-black/20 antialiased animate-fade-in">
+          <Particles className="absolute inset-0 -z-10" quantity={100} />
+          <div className="flex flex-col justify-center items-center pt-12">
+            <h1 className="text-4xl font-bold">Semester 1</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 max-w-7xl mt-5">
+              {semester1Documents.map((document, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col justify-center hover:scale-105 duration-200 items-center"
+                >
+                  <button onClick={() => openModal(document)}>
+                    <Image
+                      src={document.thumbnail || thumbnailPlaceholder}
+                      alt={document.documentName}
+                      width={400}
+                      height={500}
+                      quality={100}
+                      className="border h-[340px] w-[240px] object-cover cursor-pointer"
+                    />
+                  </button>
+                  <a
+                    className="text-lg text-center font-bold truncate w-[240px]"
+                    href={document.pdfLink}
+                  >
+                    {document.documentName}
+                  </a>
+                </div>
+              ))}
+            </div>
+            <h1 className="text-4xl font-bold mt-10">Semester 2</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 max-w-7xl mt-5">
+              {semester2Documents.map((document, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col justify-center hover:scale-105 duration-200 items-center"
+                >
+                  <button onClick={() => openModal(document)}>
+                    <Image
+                      src={document.thumbnail || thumbnailPlaceholder}
+                      alt={document.documentName}
+                      width={400}
+                      height={500}
+                      quality={100}
+                      className="rounded-md h-[340px] w-[240px] object-cover cursor-pointer"
+                    />
+                  </button>
+                  <a
+                    className="text-lg text-center font-bold truncate w-[240px]"
+                    href={document.pdfLink}
+                  >
+                    {document.documentName}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+          {selectedDocument && (
+            <div
+              className="fixed top-0 left-0 w-full h-screen bg-black/50 flex justify-center items-center z-50"
               onClick={closeModal}
             >
-              &times;
-            </button>
-            <iframe
-              className="w-1/2 h-screen"
-              src={selectedDocument.pdfLink}
-              title={selectedDocument.documentName}
-            ></iframe>
-          </div>
-        )}
-      </div>
+              <button
+                className="absolute top-2 right-2 text-lg font-bold text-white"
+                onClick={closeModal}
+              >
+                &times;
+              </button>
+              <iframe
+                className="w-1/2 h-screen"
+                src={selectedDocument.pdfLink}
+                title={selectedDocument.documentName}
+              ></iframe>
+            </div>
+          )}
+        </div>
+      )}
     </main>
   );
 }
