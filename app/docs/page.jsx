@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Particles from "@/components/particles";
 
-function page() {
+export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
   const [selectedDocument, setSelectedDocument] = useState(null); // State to track the selected document
@@ -126,5 +126,3 @@ function page() {
     </main>
   );
 }
-
-export default page;
