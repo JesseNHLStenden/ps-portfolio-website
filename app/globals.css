@@ -75,6 +75,14 @@
   }
 }
 
+* {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .banter-loader {
   position: absolute;
   left: 50%;
