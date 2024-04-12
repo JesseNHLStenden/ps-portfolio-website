@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="">
+          <div>
             {children}
             <Analytics />
             <SpeedInsights />

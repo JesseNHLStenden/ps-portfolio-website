@@ -169,7 +169,6 @@ export default function Page() {
           )}
         </div>
       )}
-      <Footer />
     </main>
   );
 }
