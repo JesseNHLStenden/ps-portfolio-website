@@ -32,7 +32,7 @@ export default function Page() {
         setSemester2Documents(semester2);
         setTimeout(() => {
           setLoading(false);
-        }, 1250);
+        }, 750);
       } catch (error) {
         console.error("Error fetching documents:", error);
         setSemester1Documents([]);
