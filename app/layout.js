@@ -27,7 +27,7 @@ export const metadata = {
     locale: 'en_US',
     title: 'Next.js',
     description: 'Welkom bij mijn portfolio website voor Professional Skills. Hier zal ik al mijn documenten op plaatsen die ik in de loop van mijn studie heb gemaakt.',
-    url: 'https://bramsuurd.nl/defaultimg.png',
+    url: '/defaultimg.png',
   },
 }
 
