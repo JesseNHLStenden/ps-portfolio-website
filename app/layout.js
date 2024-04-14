@@ -14,6 +14,7 @@ export const metadata = {
   authors: [{ name: 'Bram' }],
   creator: 'Bram Suurd',
   publisher: 'Bram Suurd',
+  favicon: '/app/favicon.ico',
   formatDetection: {
     email: false,
     address: false,
