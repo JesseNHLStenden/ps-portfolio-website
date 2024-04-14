@@ -27,7 +27,7 @@ export const metadata = {
     siteName: 'Bram | Portfolio',
     images: [
       {
-        url: 'https://bramsuurd.nl/defaultimg.png',
+        url: 'https://ps.bramsuurd.nl/defaultimg.png',
         width: 1901,
         height: 916,
       },

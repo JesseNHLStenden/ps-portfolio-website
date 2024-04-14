@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Footer from "@/components/Footer";
 
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
