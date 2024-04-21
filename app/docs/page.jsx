@@ -3,40 +3,41 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import { pb, getImageURL } from "@/lib/pocketbase";
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
   const [selectedDocument, setSelectedDocument] = useState(null);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [isloading, setLoading] = useState(true); // Added loading state
   const thumbnailPlaceholder = "https://placehold.co/240x340";
+
+  async function getFiles() {
+    const response = await fetch(
+      "http://cdn.bramsuurd.nl/api/collections/3wpait0y5cwq47t/records",
+    );
+    const data = await response.json();
+    return data.items;
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/document");
-        if (!res.ok) {
-          throw new Error("Failed to fetch documents");
-        }
-        const data = await res.json();
-
-        const semester1 = data.filter(
-          (doc) => doc.year === 1 && doc.semester === 1,
-        );
-        const semester2 = data.filter(
-          (doc) => doc.year === 1 && doc.semester === 2,
-        );
+        setLoading(true);
+        const files = await getFiles();
+        const semester1 = files.filter((file) => file.semester === "1");
+        const semester2 = files.filter((file) => file.semester === "2");
 
         setSemester1Documents(semester1);
         setSemester2Documents(semester2);
+        
         setTimeout(() => {
           setLoading(false);
-        }, 750);
+        }, 1250);
       } catch (error) {
         console.error("Error fetching documents:", error);
         setSemester1Documents([]);
         setSemester2Documents([]);
-        setLoading(false); // Set loading to false in case of error
+        setLoading(false);
       }
     };
 
@@ -53,26 +54,18 @@ export default function Page() {
 
   return (
     <main>
-      {loading ? (
-        <div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div class="banter-loader">
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
-            <div class="banter-loader__box"></div>
+      {isloading ? (
+        <div className="w-screen h-screen flex justify-center items-center">
+          <div className="banter-loader">
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
+            <div className="banter-loader__box"></div>
           </div>
         </div>
       ) : (
@@ -94,14 +87,17 @@ export default function Page() {
             </TabsList>
             <TabsContent value="sem1">
               <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {semester1Documents.map((document, index) => (
+                {semester1Documents.map((document) => (
                   <div
-                    key={index}
+                    key={document.id}
                     className="flex flex-col items-center justify-center duration-200 hover:scale-105"
                   >
                     <button onClick={() => openModal(document)}>
                       <Image
-                        src={document.thumbnail || thumbnailPlaceholder}
+                        src={
+                          getImageURL(document.id, document.thumbnail) ||
+                          thumbnailPlaceholder
+                        }
                         alt={document.documentName}
                         width={400}
                         height={500}
@@ -109,12 +105,12 @@ export default function Page() {
                         className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
                       />
                     </button>
-                    <a
+                    <button
                       className="w-[240px] truncate text-center text-lg font-bold"
-                      href={document.pdfLink}
+                      onClick={() => openModal(document)}
                     >
                       {document.documentName}
-                    </a>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -128,7 +124,10 @@ export default function Page() {
                   >
                     <button onClick={() => openModal(document)}>
                       <Image
-                        src={document.thumbnail || thumbnailPlaceholder}
+                        src={
+                          getImageURL(document.id, document.thumbnail) ||
+                          thumbnailPlaceholder
+                        }
                         alt={document.documentName}
                         width={400}
                         height={500}
@@ -136,12 +135,12 @@ export default function Page() {
                         className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
                       />
                     </button>
-                    <a
+                    <button
                       className="w-[240px] truncate text-center text-lg font-bold"
-                      href={document.pdfLink}
+                      onClick={() => openModal(document)}
                     >
                       {document.documentName}
-                    </a>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -161,7 +160,7 @@ export default function Page() {
               </button>
               <iframe
                 className="h-screen w-1/2"
-                src={selectedDocument.pdfLink}
+                src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
                 title={selectedDocument.documentName}
               ></iframe>
             </div>
