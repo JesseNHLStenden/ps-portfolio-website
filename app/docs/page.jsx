@@ -13,7 +13,7 @@ export default function Page() {
 
   async function getFiles() {
     const response = await fetch(
-      "http://cdn.bramsuurd.nl/api/collections/3wpait0y5cwq47t/records",
+      "https://cdn.bramsuurd.nl/api/collections/3wpait0y5cwq47t/records",
     );
     const data = await response.json();
     return data.items;
