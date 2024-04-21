@@ -24,8 +24,12 @@ export default function Page() {
       try {
         setLoading(true);
         const files = await getFiles();
-        const semester1 = files.filter((file) => file.semester === "1");
-        const semester2 = files.filter((file) => file.semester === "2");
+        const semester1 = files.filter(
+          (file) => file.semester === "1" && file.year === "1",
+        );
+        const semester2 = files.filter(
+          (file) => file.semester === "2" && file.year === "1",
+        );
 
         setSemester1Documents(semester1);
         setSemester2Documents(semester2);
