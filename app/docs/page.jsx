@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { pb, getImageURL } from "@/lib/pocketbase";
+import { getImageURL } from "@/lib/pocketbase";
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
