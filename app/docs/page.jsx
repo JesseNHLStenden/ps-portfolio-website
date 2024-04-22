@@ -59,7 +59,7 @@ export default function Page() {
   return (
     <main>
       {isloading ? (
-        <div className="w-screen h-screen flex justify-center items-center">
+        <div className="flex h-screen w-screen items-center justify-center">
           <div className="banter-loader">
             <div className="banter-loader__box"></div>
             <div className="banter-loader__box"></div>
@@ -105,6 +105,7 @@ export default function Page() {
                         alt={document.documentName}
                         width={400}
                         height={500}
+                        loading="eager"
                         quality={100}
                         className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
                       />
@@ -121,9 +122,9 @@ export default function Page() {
             </TabsContent>
             <TabsContent value="sem2">
               <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {semester2Documents.map((document, index) => (
+                {semester2Documents.map((document) => (
                   <div
-                    key={index}
+                    key={document.id}
                     className="flex flex-col items-center justify-center duration-200 hover:scale-105"
                   >
                     <button onClick={() => openModal(document)}>
@@ -135,6 +136,7 @@ export default function Page() {
                         alt={document.documentName}
                         width={400}
                         height={500}
+                        loading="eager"
                         quality={100}
                         className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
                       />
@@ -164,8 +166,8 @@ export default function Page() {
               </button>
               <iframe
                 className="h-screen w-1/2"
-                src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
                 title={selectedDocument.documentName}
+                src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
               ></iframe>
             </div>
           )}
