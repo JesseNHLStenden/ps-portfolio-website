@@ -4,6 +4,7 @@ import Image from "next/image";
 import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getImageURL } from "@/lib/pocketbase";
+import DocumentShowcase from "@/components/DocumentShowcase";
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
@@ -90,66 +91,10 @@ export default function Page() {
               <TabsTrigger value="sem2">Semester 2</TabsTrigger>
             </TabsList>
             <TabsContent value="sem1">
-              <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {semester1Documents.map((document) => (
-                  <div
-                    key={document.id}
-                    className="flex flex-col items-center justify-center duration-200 hover:scale-105"
-                  >
-                    <button onClick={() => openModal(document)}>
-                      <Image
-                        src={
-                          getImageURL(document.id, document.thumbnail) ||
-                          thumbnailPlaceholder
-                        }
-                        alt={document.documentName}
-                        width={400}
-                        height={500}
-                        loading="eager"
-                        quality={100}
-                        className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
-                      />
-                    </button>
-                    <button
-                      className="w-[240px] truncate text-center text-lg font-bold"
-                      onClick={() => openModal(document)}
-                    >
-                      {document.documentName}
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <DocumentShowcase semestername={semester1Documents} />
             </TabsContent>
             <TabsContent value="sem2">
-              <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {semester2Documents.map((document) => (
-                  <div
-                    key={document.id}
-                    className="flex flex-col items-center justify-center duration-200 hover:scale-105"
-                  >
-                    <button onClick={() => openModal(document)}>
-                      <Image
-                        src={
-                          getImageURL(document.id, document.thumbnail) ||
-                          thumbnailPlaceholder
-                        }
-                        alt={document.documentName}
-                        width={400}
-                        height={500}
-                        loading="eager"
-                        quality={100}
-                        className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
-                      />
-                    </button>
-                    <button
-                      className="w-[240px] truncate text-center text-lg font-bold"
-                      onClick={() => openModal(document)}
-                    >
-                      {document.documentName}
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <DocumentShowcase semestername={semester2Documents} />
             </TabsContent>
           </Tabs>
           <div className="flex flex-col items-center justify-center pt-12"></div>
