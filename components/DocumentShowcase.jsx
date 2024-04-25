@@ -33,7 +33,7 @@ function DocumentShowcase({ semestername }) {
                 alt={document.documentName}
                 width={400}
                 height={500}
-                loading="eager"
+                priority={true}
                 quality={100}
                 className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
               />
