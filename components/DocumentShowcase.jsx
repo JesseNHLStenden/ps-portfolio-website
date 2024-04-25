@@ -1,9 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import { getImageURL } from "@/lib/pocketbase";
 import Image from "next/image";
 
+
 function DocumentShowcase({ semestername }) {
+  const [selectedDocument, setSelectedDocument] = useState(null);
   const thumbnailPlaceholder = "https://placehold.co/240x340";
+
+  const openModal = (document) => {
+    setSelectedDocument(document);
+  };
+
+  const closeModal = () => {
+    setSelectedDocument(null);
+  }
+
   return (
     <>
       <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
@@ -11,6 +22,7 @@ function DocumentShowcase({ semestername }) {
           <div
             key={document.id}
             className="flex flex-col items-center justify-center duration-200 hover:scale-105"
+            onClick={() => openModal(document)}
           >
             <button onClick={() => openModal(document)}>
               <Image
@@ -35,6 +47,24 @@ function DocumentShowcase({ semestername }) {
           </div>
         ))}
       </div>
+      {selectedDocument && (
+        <div
+          className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black/50"
+          onClick={closeModal}
+        >
+          <button
+            className="absolute right-2 top-2 text-lg font-bold text-white"
+            onClick={closeModal}
+          >
+            &times;
+          </button>
+          <iframe
+            className="h-screen w-1/2"
+            title={selectedDocument.documentName}
+            src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
+          ></iframe>
+        </div>
+      )}
     </>
   );
 }

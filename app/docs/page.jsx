@@ -1,16 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getImageURL } from "@/lib/pocketbase";
 import DocumentShowcase from "@/components/DocumentShowcase";
+import Loader from "@/components/Loader";
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
-  const [selectedDocument, setSelectedDocument] = useState(null);
-  const [isloading, setLoading] = useState(true); // Added loading state
-  const thumbnailPlaceholder = "https://placehold.co/240x340";
+  const [isloading, setLoading] = useState(true);
 
   async function getFiles() {
     const response = await fetch(
@@ -34,7 +31,7 @@ export default function Page() {
 
         setSemester1Documents(semester1);
         setSemester2Documents(semester2);
-        
+
         setTimeout(() => {
           setLoading(false);
         }, 1250);
@@ -49,29 +46,11 @@ export default function Page() {
     fetchData();
   }, []);
 
-  const openModal = (document) => {
-    setSelectedDocument(document);
-  };
-
-  const closeModal = () => {
-    setSelectedDocument(null);
-  };
-
   return (
     <main>
       {isloading ? (
         <div className="flex h-screen w-screen items-center justify-center">
-          <div className="banter-loader">
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-            <div className="banter-loader__box"></div>
-          </div>
+          <Loader />
         </div>
       ) : (
         <div className="max-w-screen flex min-h-screen animate-fade-in flex-col items-center overflow-x-hidden overscroll-none bg-gradient-to-tl from-black/20 via-zinc-600/20 to-black/20 antialiased">
@@ -80,7 +59,7 @@ export default function Page() {
             quantity={100}
           />
           <h1 className="mb-4 pt-10 text-center text-4xl font-bold">
-            Professional Skills Portfolio
+            Professional Skills
           </h1>
           <Tabs
             defaultValue="sem2"
@@ -97,25 +76,6 @@ export default function Page() {
               <DocumentShowcase semestername={semester2Documents} />
             </TabsContent>
           </Tabs>
-          <div className="flex flex-col items-center justify-center pt-12"></div>
-          {selectedDocument && (
-            <div
-              className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black/50"
-              onClick={closeModal}
-            >
-              <button
-                className="absolute right-2 top-2 text-lg font-bold text-white"
-                onClick={closeModal}
-              >
-                &times;
-              </button>
-              <iframe
-                className="h-screen w-1/2"
-                title={selectedDocument.documentName}
-                src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
-              ></iframe>
-            </div>
-          )}
         </div>
       )}
     </main>
