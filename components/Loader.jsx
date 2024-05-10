@@ -1,6 +1,6 @@
 import React from "react";
 
-function Loader() {
+export default function Loader() {
   return (
     <>
       <div className="banter-loader">
@@ -17,5 +17,3 @@ function Loader() {
     </>
   );
 }
-
-export default Loader;

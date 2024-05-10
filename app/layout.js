@@ -42,6 +42,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://analytics.bramsuurd.nl/script.js"
+          data-website-id="23aa29f6-9b15-4b52-9c89-710b7d31e227"
+        ></script>
+      </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div>
