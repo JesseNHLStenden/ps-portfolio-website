@@ -34,6 +34,8 @@ export default function Page() {
 
         setSemester1Documents(semester1);
         setSemester2Documents(semester2);
+
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching documents:", error);
         setSemester1Documents([]);
