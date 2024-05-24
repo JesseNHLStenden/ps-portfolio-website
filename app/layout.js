@@ -49,9 +49,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div>
-            {children}
-          </div>
+          <div className="select-none">{children}</div>
         </ThemeProvider>
       </body>
     </html>

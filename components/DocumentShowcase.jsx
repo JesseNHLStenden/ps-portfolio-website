@@ -1,52 +1,132 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { getImageURL } from "@/lib/pocketbase";
 import Image from "next/image";
-
+import { FolderClosed, Undo2} from "lucide-react";
 
 function DocumentShowcase({ semestername }) {
   const [selectedDocument, setSelectedDocument] = useState(null);
+  const [selectedFolder, setSelectedFolder] = useState(null);
   const thumbnailPlaceholder = "https://placehold.co/240x340";
 
   const openModal = (document) => {
     setSelectedDocument(document);
   };
 
+  const openFolder = (folder) => {
+    setSelectedFolder(folder);
+  };
+
   const closeModal = () => {
     setSelectedDocument(null);
-  }
+  };
 
   return (
     <>
-      <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {semestername.map((document) => (
-          <div
-            key={document.id}
-            className="flex flex-col items-center justify-center duration-200 hover:scale-105"
-            onClick={() => openModal(document)}
-          >
-            <button onClick={() => openModal(document)}>
-              <Image
-                src={
-                  getImageURL(document.id, document.thumbnail) ||
-                  thumbnailPlaceholder
-                }
-                alt={document.documentName}
-                width={400}
-                height={500}
-                priority={true}
-                quality={100}
-                className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
-              />
-            </button>
-            <button
-              className="w-[240px] truncate text-center text-lg font-bold"
-              onClick={() => openModal(document)}
+      {!selectedFolder ? (
+        <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {semestername.map((document) => (
+            <div key={document.expand.psDocs[0].id}>
+              {document.expand.psDocs.length > 1 ? (
+                <div
+                  className="flex flex-col items-center justify-center duration-200 hover:scale-105"
+                  onClick={() => openFolder(document.expand.psDocs)}
+                >
+                  <div className="h-[340px] w-[240px] cursor-pointer rounded-md bg-gray-500/25 object-cover">
+                    <div className="flex h-[340px] w-[240px] cursor-pointer items-center justify-center rounded-md object-cover">
+                      <FolderClosed className="h-12 w-12" />
+                    </div>
+                  </div>
+                  <button
+                    className="w-[240px] truncate text-center text-lg font-bold"
+                    onClick={() => openFolder(document.expand.psDocs)}
+                  >
+                    {document.mapNaam}
+                  </button>
+                </div>
+              ) : (
+                <div
+                  className="flex flex-col items-center justify-center duration-200 hover:scale-105"
+                  onClick={() => openModal(document.expand.psDocs[0])}
+                >
+                  <button>
+                    <Image
+                      src={
+                        getImageURL(
+                          document.expand.psDocs[0].id,
+                          document.expand.psDocs[0].thumbnail,
+                        ) || thumbnailPlaceholder
+                      }
+                      alt={document.expand.psDocs[0].documentName}
+                      width={400}
+                      height={500}
+                      priority={true}
+                      quality={100}
+                      className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
+                    />
+                  </button>
+                  <button
+                    className="w-[240px] truncate text-center text-lg font-bold"
+                    onClick={() => openModal(document.expand.psDocs[0])}
+                  >
+                    {document.expand.psDocs[0].documentName}
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-5 grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          <div>
+            <div
+              className="flex flex-col items-center justify-center duration-200 hover:scale-105"
+              onClick={() => setSelectedFolder(null)}
             >
-              {document.documentName}
-            </button>
+              <div className="h-[340px] w-[240px] cursor-pointer rounded-md bg-gray-500/25 object-cover">
+                <div className="flex h-[340px] w-[240px] cursor-pointer items-center justify-center rounded-md object-cover">
+                  <Undo2 className="h-12 w-12" />
+                </div>
+              </div>
+              <button
+                className="w-[240px] truncate text-center text-lg font-bold"
+                onClick={() => setSelectedFolder(null)}
+              >
+                Ga terug
+              </button>
+            </div>
           </div>
-        ))}
-      </div>
+          {selectedFolder.map((document) => (
+            <div key={document.id}>
+              <div
+                className="flex flex-col items-center justify-center duration-200 hover:scale-105"
+                onClick={() => openModal(document)}
+              >
+                <button>
+                  <Image
+                    src={
+                      getImageURL(document.id, document.thumbnail) ||
+                      thumbnailPlaceholder
+                    }
+                    alt={document.documentName}
+                    width={400}
+                    height={500}
+                    priority={true}
+                    quality={100}
+                    className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
+                  />
+                </button>
+                <button
+                  className="w-[240px] truncate text-center text-lg font-bold"
+                  onClick={() => openModal(document)}
+                >
+                  {document.documentName}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {selectedDocument && (
         <div
           className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black/50"
