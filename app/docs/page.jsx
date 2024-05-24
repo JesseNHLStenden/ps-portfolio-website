@@ -22,7 +22,6 @@ export default function Page() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 1250));
         const files = await getFiles();
         const semester1 = files.filter(
           (file) => file.semester === 1 && file.year === 1,
@@ -30,6 +29,8 @@ export default function Page() {
         const semester2 = files.filter(
           (file) => file.semester === 2 && file.year === 1,
         );
+
+        await new Promise((resolve) => setTimeout(resolve, 1250));
 
         setSemester1Documents(semester1);
         setSemester2Documents(semester2);
