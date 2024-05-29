@@ -7,9 +7,16 @@ function DocumentShowcase({ semestername }) {
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const thumbnailPlaceholder = "https://placehold.co/240x340";
+  const [width, setWidth] = React.useState(
+    typeof window !== "undefined" ? window.innerWidth : 0,
+  );
 
   const openModal = (document) => {
-    setSelectedDocument(document);
+    if (!isMobile) {
+      setSelectedDocument(document);
+    } else {
+      window.open(getImageURL(document.id, document.pdf));
+    }
   };
 
   const openFolder = (folder) => {
@@ -19,6 +26,20 @@ function DocumentShowcase({ semestername }) {
   const closeModal = () => {
     setSelectedDocument(null);
   };
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isMobile = width <= 640;
 
   return (
     <>
