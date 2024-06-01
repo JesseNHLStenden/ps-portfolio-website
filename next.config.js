@@ -5,6 +5,6 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ["cdn-bramsuurd-nl.fly.dev"],
+    domains: ["bram.fly.dev"],
   },
 };
