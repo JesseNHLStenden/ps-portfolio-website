@@ -14,7 +14,7 @@ export default function StudentNumber() {
   return (
     <div className="fixed top-0 right-0 m-2">
       <Button variant="outline" onClick={() => handleCopy("5371333", "Studentnummer")}>
-        5371333
+        SN: 5371333
       </Button>
     </div>
   );
