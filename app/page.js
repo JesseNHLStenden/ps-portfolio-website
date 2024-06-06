@@ -2,6 +2,7 @@ import Particles from "@/components/particles";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 function page() {
 =======
@@ -70,6 +71,11 @@ function Page() {
   }
 
 >>>>>>> parent of 4f55a45 (Refactor form layout and error handling in page.js)
+=======
+import React from "react";
+
+function page() {
+>>>>>>> parent of a83590f (added token based authentication to the docs page)
   return (
     <div className="animate-glow flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black/20 via-zinc-600/20 to-black/20 antialiased">
       <Particles
@@ -82,6 +88,7 @@ function Page() {
         al mijn documenten op plaatsen die ik in de loop van mijn studie heb
         gemaakt.
       </p>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <Button size="lg" className="mt-5 animate-fade-in" asChild>
         <Link href="/docs">Bekijk documenten</Link>
@@ -150,6 +157,11 @@ function Page() {
         </DialogContent>
       </Dialog>
 >>>>>>> parent of 4f55a45 (Refactor form layout and error handling in page.js)
+=======
+      <Button size="lg" className="mt-5 animate-fade-in" asChild>
+        <Link href="/docs">Bekijk documenten</Link>
+      </Button>
+>>>>>>> parent of a83590f (added token based authentication to the docs page)
     </div>
   );
 }
