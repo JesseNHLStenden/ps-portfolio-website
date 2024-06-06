@@ -4,25 +4,18 @@ import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DocumentShowcase from "@/components/DocumentShowcase";
 import Loader from "@/components/Loader";
+import { pb } from "@/lib/pocketbase";
 
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
   const [isloading, setLoading] = useState(true);
 
-  useEffect(() => {}, []);
-
   async function getFiles() {
-    const { searchParams } = new URL(window.location.href);
-    const tokenitem = searchParams.get("token");
-    try {
-      const response = await fetch(`/api/docs?token=${tokenitem}`);
-      const data = await response.json();
-      return data.psItems;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    const response = await pb.collection("ps_items").getFullList({
+      expand: "psDocs"
+    })
+    return response;
   }
 
   useEffect(() => {
