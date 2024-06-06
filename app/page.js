@@ -113,13 +113,15 @@ function Page() {
               className="flex w-full flex-col gap-2"
               onSubmit={handleSubmit}
             >
-              <div className="flex flex-col gap-4 sm:flex-row sm:gap-2">
+              <div className="flex sm:gap-2 gap-4 sm:flex-row flex-col">
                 <Input
                   type="password"
                   placeholder="Token"
                   name="token"
                   value={inputToken}
                   onChange={(e) => setInputToken(e.target.value)}
+                
+                  // when the success state is true, the input field will have a green border. when the error state is true, the input field will have a red border.
                   className={`${
                     success ? "border-green-500" : ""
                   } ${error ? "border-red-500" : ""}`}
@@ -142,11 +144,7 @@ function Page() {
                   )}
                 </Button>
               </div>
-              {error && (
-                <p className="text-xs text-red-500">
-                  Verkeerde token, probeer het opnieuw
-                </p>
-              )}
+              {error && <p className="text-xs text-red-500">Verkeerde token, probeer het opnieuw</p>}
             </form>
           </DialogFooter>
         </DialogContent>
