@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import handleCopy from "@/lib/utils";
 import StudentNumber from "@/components/StudentNumber";
 import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,8 +66,14 @@ export default function RootLayout({ children }) {
           <div className="select-none">
             {children}
             <StudentNumber />
-            <Button asChild className="fixed top-0 left-0 m-2" variant="outline">
-              <Link target="_blank" href="https://bramsuurd.nl">Portfolio website</Link>
+            <Button
+              asChild
+              className="fixed left-0 top-0 m-2"
+              variant="outline"
+            >
+              <Link target="_blank" href="https://bramsuurd.nl">
+                Portfolio website <ExternalLink className="w-4 h-4 ml-2" />
+              </Link>
             </Button>
             <Toaster richColors position="bottom-center" />
           </div>
