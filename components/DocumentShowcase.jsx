@@ -168,6 +168,7 @@ function DocumentShowcase({ semestername }) {
               title={selectedDocument.documentName}
               src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
             ></iframe>
+            <div className="w-12"></div>
           </div>
         </div>
       )}
