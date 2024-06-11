@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
             {children}
             <Button
               asChild
-              className="fixed left-0 top-0 m-2 "
+              className="hidden sm:fixed left-0 top-0 m-2 "
               variant="outline"
               size="sm"
             >

@@ -13,7 +13,7 @@ export function handleCopy(input, melding) {
 
 export default function StudentNumber() {
   return (
-    <div className="fixed left-0 top-11 m-2">
+    <div className="hidden sm:fixed left-0 top-11 m-2">
       <Button
         variant="outline"
         size="sm"
