@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { getImageURL } from "@/lib/pocketbase";
 import Image from "next/image";
-import { FolderClosed, Undo2} from "lucide-react";
+import { Download, ExternalLink, FolderClosed, Undo2, X} from "lucide-react";
+import { Button } from "./ui/button";
 
 function DocumentShowcase({ semestername }) {
   const [selectedDocument, setSelectedDocument] = useState(null);
@@ -153,17 +154,21 @@ function DocumentShowcase({ semestername }) {
           className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black/50"
           onClick={closeModal}
         >
-          <button
-            className="absolute right-2 top-2 text-lg font-bold text-white"
-            onClick={closeModal}
-          >
-            &times;
-          </button>
-          <iframe
-            className="h-screen w-1/2"
-            title={selectedDocument.documentName}
-            src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
-          ></iframe>
+          <div className="flex w-full flex-row-reverse items-center justify-center">
+            <Button
+              className="m-2 self-start text-lg font-bold text-white"
+              onClick={closeModal}
+              size="icon"
+              variant="default"
+            >
+              <X className="h-4 w-4 text-black" />
+            </Button>
+            <iframe
+              className="h-screen w-1/2"
+              title={selectedDocument.documentName}
+              src={getImageURL(selectedDocument.id, selectedDocument.pdf)}
+            ></iframe>
+          </div>
         </div>
       )}
     </>

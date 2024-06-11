@@ -13,12 +13,13 @@ export function handleCopy(input, melding) {
 
 export default function StudentNumber() {
   return (
-    <div className="fixed right-0 top-0 m-2">
+    <div className="fixed left-0 top-11 m-2">
       <Button
         variant="outline"
+        size="sm"
         onClick={() => handleCopy("5371333", "Studentnummer")}
       >
-        <Copy className="w-4 h-4 mr-2" /> SN: 5371333
+      SN: 5371333 <Copy className="w-4 h-4 ml-2" />
       </Button>
     </div>
   );

@@ -1,5 +1,7 @@
 import Particles from "@/components/particles";
+import StudentNumber from "@/components/StudentNumber";
 import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
