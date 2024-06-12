@@ -66,12 +66,12 @@ export default function RootLayout({ children }) {
             {children}
             <Button
               asChild
-              className="hidden sm:fixed left-0 top-0 m-2 "
+              className="left-0 top-0 m-2 hidden sm:fixed sm:block "
               variant="outline"
               size="sm"
             >
               <Link target="_blank" href="https://bramsuurd.nl">
-                Portfolio website <ExternalLink className="ml-2 h-4 w-4" />
+                <span className="flex items-center justify-center h-full w-full">Portfolio website <ExternalLink className="ml-2 h-4 w-4" /></span>
               </Link>
             </Button>
             <StudentNumber />
