@@ -27,11 +27,6 @@ export default function Page() {
       }
     }, [router]);
 
-    function logout() {
-      pb.authStore.clear();
-      router.push("/");
-    }
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,8 +85,7 @@ export default function Page() {
             <TabsContent value="sem2">
               <DocumentShowcase semestername={semester2Documents} />
             </TabsContent>
-            </Tabs>
-            <Button onClick={logout}>Logout</Button>
+          </Tabs>
         </div>
       )}
     </main>
