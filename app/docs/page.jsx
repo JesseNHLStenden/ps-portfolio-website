@@ -1,15 +1,18 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DocumentShowcase from "@/components/DocumentShowcase";
 import Loader from "@/components/Loader";
 import { pb } from "@/lib/pocketbase";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [semester1Documents, setSemester1Documents] = useState([]);
   const [semester2Documents, setSemester2Documents] = useState([]);
   const [isloading, setLoading] = useState(true);
+  const router = useRouter();
 
   async function getFiles() {
     const response = await pb.collection("ps_items").getFullList({
@@ -17,6 +20,17 @@ export default function Page() {
     })
     return response;
   }
+
+    useEffect(() => {
+      if (!pb.authStore.isValid) {
+        router.push("/");
+      }
+    }, [router]);
+
+    function logout() {
+      pb.authStore.clear();
+      router.push("/");
+    }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +90,8 @@ export default function Page() {
             <TabsContent value="sem2">
               <DocumentShowcase semestername={semester2Documents} />
             </TabsContent>
-          </Tabs>
+            </Tabs>
+            <Button onClick={logout}>Logout</Button>
         </div>
       )}
     </main>
