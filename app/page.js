@@ -25,10 +25,6 @@ function Page() {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    if (pb.authStore.isValid) {
-      setIsLoggedIn(true);
-    }
-
     const url = new URL(window.location.href);
 
     if (url.searchParams.has("token")) {
@@ -44,6 +40,10 @@ function Page() {
           .collection("tokens")
           .authWithPassword("contact@bramsuurd.nl", token);
       })();
+    }
+
+    if (pb.authStore.isValid) {
+      setIsLoggedIn(true);
     }
   }, [setIsLoggedIn, token, setToken]);
 
