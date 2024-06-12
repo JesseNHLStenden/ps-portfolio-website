@@ -2,10 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import StudentNumber from "@/components/StudentNumber";
-import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
-import Link from "next/link";
+import { StudentNumber, PortfolioWebsite } from "@/components/Buttons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -64,16 +61,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="select-none">
             {children}
-            <Button
-              asChild
-              className="left-0 top-0 m-2 hidden sm:fixed sm:block "
-              variant="outline"
-              size="sm"
-            >
-              <Link target="_blank" href="https://bramsuurd.nl">
-                <span className="flex items-center justify-center h-full w-full">Portfolio website <ExternalLink className="ml-2 h-4 w-4" /></span>
-              </Link>
-            </Button>
+            <PortfolioWebsite />
             <StudentNumber />
             <Toaster richColors position="bottom-center" />
           </div>
