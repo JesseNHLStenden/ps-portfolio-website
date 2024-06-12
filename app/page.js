@@ -22,12 +22,30 @@ function Page() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState("");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     if (pb.authStore.isValid) {
       setIsLoggedIn(true);
     }
-  }, [setIsLoggedIn]);
+
+    const url = new URL(window.location.href);
+
+    if (url.searchParams.has("token")) {
+      const token = url.searchParams.get("token");
+      setToken(token);
+      url.searchParams.delete("token");
+      window.history.replaceState({}, "", url);
+    }
+
+    if (token) {
+      (async () => {
+        await pb
+          .collection("tokens")
+          .authWithPassword("contact@bramsuurd.nl", token);
+      })();
+    }
+  }, [setIsLoggedIn, token, setToken]);
 
   async function login(event) {
     try {
@@ -45,7 +63,7 @@ function Page() {
         setIsError("Authenticatie mislukt, probeer het opnieuw.");
       }
     } catch (error) {
-      console.error(error); // Log the error to inspect its structure
+      console.error(error); 
 
       if (error && error.status) {
         if (error.status === 400) {
