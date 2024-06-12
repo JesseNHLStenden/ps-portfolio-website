@@ -40,6 +40,12 @@ function Page() {
           .collection("tokens")
           .authWithPassword("contact@bramsuurd.nl", token);
       })();
+
+      if (pb.authStore.isValid) {
+        setIsLoggedIn(true);
+      } else {
+        console.log("Token is invalid");
+      }
     }
 
     if (pb.authStore.isValid) {
