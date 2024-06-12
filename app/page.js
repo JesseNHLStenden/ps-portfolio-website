@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Loader2, Lock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 function Page() {
   const router = useRouter();
@@ -73,7 +74,7 @@ function Page() {
         setIsError("Authenticatie mislukt, probeer het opnieuw.");
       }
     } catch (error) {
-      console.error(error); 
+      console.error(error);
 
       if (error && error.status) {
         if (error.status === 400) {
@@ -113,7 +114,7 @@ function Page() {
         ) : (
           <div>
             <Dialog>
-              <DialogTrigger asChild>
+              <DialogTrigger asChild onClick={() => setIsError("")}>
                 <Button size="lg" className="flex gap-2">
                   <Lock className="h-4 w-4" /> Bekijk documenten
                 </Button>
@@ -129,13 +130,18 @@ function Page() {
                   </DialogDescription>
                   <DialogFooter>
                     <div className="flex w-full flex-col gap-2">
-                      <label htmlFor="token">Token</label>
+                      <label
+                        htmlFor="token"
+                        className="text-sm text-muted-foreground"
+                      >
+                        Token
+                      </label>
                       <div className="flex gap-2">
                         <Input
                           type="password"
                           id="token"
                           name="token"
-                          className="w-full"
+                          className={`w-full ${isError ? "border-red-500" : ""}`}
                         />
                         <Button
                           type="submit"
@@ -148,7 +154,11 @@ function Page() {
                           )}
                         </Button>
                       </div>
-                        <div className="h-4">{isError && <p className="text-red-500 text-sm">{isError}</p>}</div>
+                      <div className="h-2">
+                        {isError && (
+                          <p className="text-sm text-red-500">{isError}</p>
+                        )}
+                      </div>
                     </div>
                   </DialogFooter>
                 </form>
