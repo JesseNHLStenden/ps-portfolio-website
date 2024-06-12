@@ -1,11 +1,10 @@
 "use client";
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import Particles from "@/components/particles";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DocumentShowcase from "@/components/DocumentShowcase";
 import Loader from "@/components/Loader";
 import { pb } from "@/lib/pocketbase";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
