@@ -17,7 +17,7 @@ export function StudentNumber() {
     <Button
       variant="outline"
       size="sm"
-      className="left-0 top-11 m-2 hidden animate-fade-in sm:fixed sm:block"
+      className="left-0 top-11 m-2 hidden animate-fade-in sm:fixed sm:block z-10"
       onClick={() => handleCopy("5371333", "Studentnummer")}
     >
       <span className="flex h-full w-full items-center justify-center">
@@ -31,7 +31,7 @@ export function PortfolioWebsite() {
   return (
     <Button
       asChild
-      className="left-0 top-0 m-2 hidden animate-fade-in sm:fixed sm:block"
+      className="left-0 top-0 m-2 hidden animate-fade-in sm:fixed sm:block z-10"
       variant="outline"
       size="sm"
     >
