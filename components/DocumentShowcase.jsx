@@ -83,7 +83,7 @@ function DocumentShowcase({ semestername }) {
                       height={500}
                       priority={true}
                       quality={100}
-                      className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
+                      className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover border dark:border-none"
                     />
                   </button>
                   <button
@@ -134,7 +134,7 @@ function DocumentShowcase({ semestername }) {
                     height={500}
                     priority={true}
                     quality={100}
-                    className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover"
+                    className="h-[340px] w-[240px] cursor-pointer rounded-md object-cover border dark:border-none"
                   />
                 </button>
                 <button

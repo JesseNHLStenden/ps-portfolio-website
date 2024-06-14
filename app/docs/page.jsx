@@ -62,7 +62,7 @@ export default function Page() {
           <Loader />
         </div>
       ) : (
-        <div className="max-w-screen flex min-h-screen animate-fade-in flex-col items-center overflow-x-hidden overscroll-none bg-gradient-to-tl from-black/20 via-zinc-600/20 to-black/20 antialiased">
+        <div className="max-w-screen flex min-h-screen animate-fade-in flex-col items-center overflow-x-hidden overscroll-none bg-background antialiased dark:bg-gradient-to-tl dark:from-black/20 dark:via-zinc-600/20 dark:to-black/20">
           <Particles
             className="absolute inset-0 -z-10 animate-fade-in"
             quantity={100}

@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { StudentNumber, PortfolioWebsite } from "@/components/Buttons";
+import { ModeToggle } from "@/components/ModeToggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,12 +59,13 @@ export default function RootLayout({ children }) {
         ></script>
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="select-none">
             {children}
             <PortfolioWebsite />
             <StudentNumber />
             <Toaster richColors position="bottom-center" />
+            <ModeToggle />
           </div>
         </ThemeProvider>
       </body>

@@ -93,7 +93,7 @@ function Page() {
   }
 
   return (
-    <div className="animate-glow flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black/20 via-zinc-600/20 to-black/20 antialiased">
+    <div className="animate-glow flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-white antialiased dark:bg-gradient-to-tl dark:from-black/20 dark:via-zinc-600/20 dark:to-black/20">
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={100}
