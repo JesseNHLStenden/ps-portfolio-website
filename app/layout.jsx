@@ -59,13 +59,12 @@ export default function RootLayout({ children }) {
         ></script>
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="select-none">
             {children}
             <PortfolioWebsite />
             <StudentNumber />
             <Toaster richColors position="bottom-center" />
-            <ModeToggle />
           </div>
         </ThemeProvider>
       </body>

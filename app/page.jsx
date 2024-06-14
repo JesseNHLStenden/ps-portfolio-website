@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Loader2, Lock } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 function Page() {
   const router = useRouter();
@@ -64,6 +63,9 @@ function Page() {
       event.preventDefault();
 
       const token = event.target.token.value;
+
+      await new Promise((resolve) => setTimeout(resolve, 750));
+
       await pb
         .collection("tokens")
         .authWithPassword("contact@bramsuurd.nl", token);
@@ -93,7 +95,7 @@ function Page() {
   }
 
   return (
-    <div className="animate-glow flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-background antialiased dark:bg-gradient-to-tl dark:from-black/20 dark:via-zinc-600/20 dark:to-black/20">
+    <div className="animate-glow flex h-screen w-screen flex-col items-center justify-center overflow-hidden antialiased dark:bg-gradient-to-tl dark:from-black/20 dark:via-zinc-600/20 dark:to-black/20">
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={100}
@@ -146,7 +148,7 @@ function Page() {
                         <Button
                           type="submit"
                           disabled={isLoading}
-                          className="flex gap-2"
+                          className="flex gap-2 w-48"
                         >
                           Inloggen{" "}
                           {isLoading && (
