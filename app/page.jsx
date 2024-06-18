@@ -39,7 +39,7 @@ function Page() {
         try {
           await pb
             .collection("tokens")
-            .authWithPassword("contact@bramsuurd.nl", token);
+            .authWithPassword("token@portfolio.com", token);
 
           if (pb.authStore.isValid) {
             setIsLoggedIn(true);
@@ -68,7 +68,7 @@ function Page() {
 
       await pb
         .collection("tokens")
-        .authWithPassword("contact@bramsuurd.nl", token);
+        .authWithPassword("token@portfolio.com", token);
 
       if (pb.authStore.isValid) {
         router.push("/docs");
@@ -100,7 +100,7 @@ function Page() {
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={100}
       />
-      <h1 className="mb-5 animate-fade-in text-6xl font-bold">Bram Suurd</h1>
+      <h1 className="mb-5 animate-fade-in text-6xl font-bold">Jesse van der Voet</h1>
       <p className="max-w-xl animate-fade-in text-center">
         Welkom bij mijn portfolio website voor Professional Skills. Hier zal ik
         al mijn documenten op plaatsen die ik in de loop van mijn studie heb

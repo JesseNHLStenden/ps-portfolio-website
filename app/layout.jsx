@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   generator: "Next.js",
-  applicationName: "Bram | Professional Skills Portfolio",
+  applicationName: "Jesse | Professional Skills Portfolio",
   referrer: "origin-when-cross-origin",
   keywords: [
     "Next.js",
@@ -18,27 +18,27 @@ export const metadata = {
     "Tailwind",
     "Vercel",
     "Portfolio",
-    "Bram Suurd",
+    "Jesse van der Voet",
   ],
-  authors: [{ name: "Bram" }],
-  creator: "Bram Suurd",
-  publisher: "Bram Suurd",
+  authors: [{ name: "Jesse" }],
+  creator: "Jesse van der Voet",
+  publisher: "Jesse van der Voet",
   favicon: "/app/favicon.ico",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ps.bramsuurd.nl"),
+  metadataBase: new URL("https://ps-j.pockethost.io"),
   openGraph: {
-    title: "Bram | Professional Skills Portfolio",
+    title: "Jesse | Professional Skills Portfolio",
     description:
       "Welkom bij mijn portfolio website voor Professional Skills. Hier zal ik al mijn documenten op plaatsen die ik in de loop van mijn studie heb gemaakt.",
     url: "/defaultimg.png",
-    siteName: "Bram | Portfolio",
+    siteName: "Jesse | Portfolio",
     images: [
       {
-        url: "https://ps.bramsuurd.nl/defaultimg.png",
+        url: "",
         width: 1901,
         height: 916,
       },
@@ -52,11 +52,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <script
-          defer
-          src="https://analytics.bramsuurd.nl/script.js"
-          data-website-id="23aa29f6-9b15-4b52-9c89-710b7d31e227"
-        ></script>
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

@@ -18,10 +18,10 @@ export function StudentNumber() {
       variant="outline"
       size="sm"
       className="left-0 top-11 m-2 hidden animate-fade-in sm:fixed sm:block z-10"
-      onClick={() => handleCopy("5371333", "Studentnummer")}
+      onClick={() => handleCopy("5405416", "Studentnummer")}
     >
       <span className="flex h-full w-full items-center justify-center">
-        SN: 5371333 <Copy className="ml-2 h-4 w-4" />
+        SN: 5405416 <Copy className="ml-2 h-4 w-4" />
       </span>
     </Button>
   );
@@ -37,7 +37,7 @@ export function PortfolioWebsite() {
     >
       <Link target="_blank" href="https://bramsuurd.nl">
         <span className="flex h-full w-full items-center justify-center">
-          Portfolio website <ExternalLink className="ml-2 h-4 w-4" />
+          This website is made by Bram Suurd <ExternalLink className="ml-2 h-4 w-4" />
         </span>
       </Link>
     </Button>

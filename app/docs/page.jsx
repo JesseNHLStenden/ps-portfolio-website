@@ -20,11 +20,11 @@ export default function Page() {
     return response;
   }
 
-    useEffect(() => {
-      if (!pb.authStore.isValid) {
-        router.push("/");
-      }
-    }, [router]);
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      router.push("/");
+    }
+  }, [router]);
 
   useEffect(() => {
     const fetchData = async () => {

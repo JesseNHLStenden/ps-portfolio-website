@@ -5,6 +5,6 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ["bram.fly.dev"],
+    domains: ["ps-j.pockethost.io"],
   },
 };
