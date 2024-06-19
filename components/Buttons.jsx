@@ -37,7 +37,7 @@ export function PortfolioWebsite() {
     >
       <Link target="_blank" href="https://bramsuurd.nl">
         <span className="flex h-full w-full items-center justify-center">
-          This website is made by Bram Suurd <ExternalLink className="ml-2 h-4 w-4" />
+          This website is designed by Bram Suurd <ExternalLink className="ml-2 h-4 w-4" />
         </span>
       </Link>
     </Button>
